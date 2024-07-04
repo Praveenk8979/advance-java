@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #343a40;
+      color: white;
+      width: 100%;
+      z-index: 1000;
+      padding: 0;
+    }
+    footer {
+      background-color: #343a40;
+      color: white;
+      width: 100%;
+      z-index: 1000;
+      padding: 20px 0;
+    }
+    main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+    .navbar-nav .nav-link {
+      color: white !important;
+    }
+    footer h5 {
+      text-decoration: underline;
+    }
+    footer .line {
+      border-left: 1px solid #fff;
+      height: 100%;
+    }
+    .menu-link {
+      color: white;
+      text-decoration: none;
+    }
+    .menu-link:hover {
+      text-decoration: underline;
+    }
+      footer {
+            background-color: #343a40;
+            color: white;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            transition: transform 0.3s ease-in-out;
+        }
+        footer.hidden {
+            transform: translateY(100%);
+        }
+        main {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .complaint-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .complaint-box h2 {
+            margin-bottom: 20px;
+        }
+        .toggle-footer-btn {
+            position: fixed;
+            bottom: 0;
+            right: 50%;
+            transform: translateX(50%);
+            z-index: 1001;
+            background-color: #343a40;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Book Store</title>
+     <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand text-white" href="#">Book Store</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="available_books">Available Books</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="my_books">My Books</a>
+            </li>
+          </ul>
+          <div>
+            <a class="nav-link text-white" href="complaint_box">Complaint Box</a>
+          </div>
+          <div>
+            <a class="nav-link text-white" href="book_register">New Book Register</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <h3><center>BOOKS<br>learn always</center> </h3>
+<main>
+  <div class="container my-5 col-md-8">
+  		<table class="table  table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Author</th>
+      <th scope="col">Price</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="b :${book}">
+      <td th:text="${b.id}"></td>
+      <td th:text="${b.name}"></td>
+      <td th:text="${b.author}"></td>
+      <td th:text="${b.price}"></td>
+      <td><a class="btn btn-secondary btn-sm" th:href="@{/mylist/{id}(id=${b.id})}">Add To Mybook</a>
+      <a style="color:blue" th:href="@{/editBook/{id}(id=${b.id})}"><i class="fa-solid fa-pen-to-square ms-4"></i></a>
+      <a style="color:red" th:href="@{/deleteBook/{id}(id=${b.id})}"><i class="fa-solid fa-trash ms-4"></i></a>
+      </td>
+
+    </tr>
+
+  </tbody>
+</table>
+  </div>
+</main>
+  <footer id="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3 p-2 text-light text-center">
+          <h5>Book_store</h5>
+          <p>
+            Reading different types of books broadens your perspective, enhances knowledge, improves critical thinking, boosts language skills, reduces stress, and fosters creativity.<br>!! Happy Learning !!
+          </p>
+        </div>
+        <div class="col-4 p-2 text-center">
+          <h5>Interesting books</h5>
+          <ul class="list-unstyled pt-2 fs-5 fw-bolder">
+            <li><a class="menu-link" href="https://www.bbc.com/travel/article/20171127-the-birthplace-of-the-illuminati">Illuminati facts & friction</a></li>
+            <li><a class="menu-link" href="https://www.amazon.in/New-World-Order-Way-One-Percenters-ebook/dp/B01LWD9P0J">New world order|no way out?</a></li>
+            <li><a class="menu-link" href="https://www.booknbrush.com/book/9781502644954">fake news & propaganda</a></li>
+
+          </ul>
+        </div>
+        <div class="col-1 p-4">
+          <div class="line"></div>
+        </div>
+        <div class="col-4 p-2">
+          <h5 class="text-center">Contact info :</h5>
+          <h6>Address : Amritsar</h6>
+          <h6>Phone no : +91-6787497</h6>
+          <h6>Email : <a class="neem-link" href="mailto:tarandeep.tds200313@gmail.com">book12@gmail.com</a></h6>
+          <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2585.9664397830643!2d74.9692684742402!3d31.691034038692827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391964e2de81841d%3A0x180baa8553daf078!2sGlobal%20Group%20of%20Institutes!5e1!3m2!1sen!2sin!4v1718061734404!5m2!1sen!2sin" width="200" height="50" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <button class="toggle-footer-btn" onclick="toggleFooter()">&#9660;</button>
+  <script>
+    function toggleFooter() {
+        const footer = document.getElementById('footer');
+        const button = document.querySelector('.toggle-footer-btn');
+        footer.classList.toggle('hidden');
+        button.innerHTML = footer.classList.contains('hidden') ? '&#9650;' : '&#9660;';
+    }
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+  </body>
+</html>

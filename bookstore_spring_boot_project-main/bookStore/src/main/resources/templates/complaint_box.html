@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint Box</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    header {
+        background-color: #343a40;
+        color: white;
+        width: 100%;
+        z-index: 1000;
+        padding: 0;
+        position: fixed;
+        top: 0;
+    }
+    footer {
+        background-color: #343a40;
+        color: white;
+        width: 100%;
+        z-index: 1000;
+        padding: 20px 0;
+        position: fixed;
+        bottom: 0;
+        transition: transform 0.3s ease-in-out;
+    }
+    footer.hidden {
+        transform: translateY(100%);
+    }
+    main {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+    }
+    .complaint-box {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .complaint-box h2 {
+        margin-bottom: 20px;
+    }
+    .toggle-footer-btn {
+        position: fixed;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(50%);
+        z-index: 1001;
+        background-color: #343a40;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white" href="#">Book Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="available_books">Available Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="my_books">My Books</a>
+          </li>
+        </ul>
+        <div>
+          <a class="nav-link text-white" href="complaint_box">Complaint Box</a>
+        </div>
+        <div>
+          <a class="nav-link text-white" href="book_register">New Book Register</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <div class="container my-5 complaint-box">
+    <h2>Complaint Box</h2>
+    <form action="/complaint_box" method="post" th:object="${complaint}">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" th:field="*{name}" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" th:field="*{email}" required>
+      </div>
+      <div class="mb-3">
+        <label for="complaint" class="form-label">Complaint</label>
+        <textarea class="form-control" id="complaint" th:field="*{complaint}" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div th:if="${param.success}">
+      <div class="alert alert-info">You've successfully registered
+        to our awesome app!</div>
+    </div>
+  </div>
+</main>
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3 p-2 text-light text-center">
+        <h5>Book_store</h5>
+        <p>
+          Reading different types of books broadens your perspective, enhances knowledge, improves critical thinking, boosts language skills, reduces stress, and fosters creativity.<br>!! Happy Learning !!
+        </p>
+      </div>
+      <div class="col-4 p-2 text-center">
+        <h5>Interesting books</h5>
+        <ul class="list-unstyled pt-2 fs-5 fw-bolder">
+          <li><a class="menu-link" href="https://www.bbc.com/travel/article/20171127-the-birthplace-of-the-illuminati">Illuminati facts & friction</a></li>
+          <li><a class="menu-link" href="https://www.amazon.in/New-World-Order-Way-One-Percenters-ebook/dp/B01LWD9P0J">New world order|no way out?</a></li>
+          <li><a class="menu-link" href="https://www.booknbrush.com/book/9781502644954">fake news & propaganda</a></li>
+        </ul>
+      </div>
+      <div class="col-1 p-4">
+        <div class="line"></div>
+      </div>
+      <div class="col-4 p-2">
+        <h5 class="text-center">Contact info :</h5>
+        <h6>Address : Amritsar</h6>
+        <h6>Phone no : +91-6787497</h6>
+        <h6>Email : <a class="neem-link" href="mailto:tarandeep.tds200313@gmail.com">book12@gmail.com</a></h6>
+        <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2585.9664397830643!2d74.9692684742402!3d31.691034038692827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391964e2de81841d%3A0x180baa8553daf078!2sGlobal%20Group%20of%20Institutes!5e1!3m2!1sen!2sin!4v1718061734404!5m2!1sen!2sin" width="200" height="50" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<button class="toggle-footer-btn" onclick="toggleFooter()">&#9660;</button>
+<script>
+  function toggleFooter() {
+      const footer = document.getElementById('footer');
+      const button = document.querySelector('.toggle-footer-btn');
+      footer.classList.toggle('hidden');
+      button.innerHTML = footer.classList.contains('hidden') ? '&#9650;' : '&#9660;';
+  }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
