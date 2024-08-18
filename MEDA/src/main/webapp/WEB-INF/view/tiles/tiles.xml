@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="base.definition"
+		template="/WEB-INF/view/tiles/mainTemplate.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header"
+			value="/WEB-INF/view/tiles/header.jsp"></put-attribute>
+		<put-attribute name="navbar"
+			value="/WEB-INF/view/tiles/menu.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+		<put-attribute name="footer"
+			value="/WEB-INF/view/tiles/footer.jsp"></put-attribute>
+	</definition>
+
+	<definition name="main.definition"
+		template="/WEB-INF/view/tiles/baseTemplate.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+	</definition>
+
+	<definition name="login" extends="main.definition">
+		<put-attribute name="title" value="MEDA | Login"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/login.jsp"></put-attribute>
+	</definition>
+
+	<definition name="home" extends="base.definition">
+		<put-attribute name="title" value="MEDA | Home"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/home.jsp"></put-attribute>
+	</definition>
+
+	<definition name="addUser" extends="base.definition">
+		<put-attribute name="title" value="MEDA | Add User"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/addUser.jsp"></put-attribute>
+	</definition>
+
+	<definition name="currentUser" extends="base.definition">
+		<put-attribute name="title" value="MEDA | Profile"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/currentUser.jsp"></put-attribute>
+	</definition>
+	<definition name="user-list" extends="base.definition">
+		<put-attribute name="title" value="MEDA | User List"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/user-list.jsp"></put-attribute>
+	</definition>
+
+	<definition name="error" extends="main.definition">
+		<put-attribute name="title" value="MEDA | Error"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/tiles/error.jsp"></put-attribute>
+	</definition>
+
+
+	<definition name="uploadCsv1" extends="base.definition">
+		<put-attribute name="title" value="MEDA | Upload CSV"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/uploadCsv1.jsp"></put-attribute>
+
+	</definition>
+
+	<definition name="uploadForm" extends="base.definition">
+		<put-attribute name="title" value="MEDA | Upload Form"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/view/uploadForm.jsp"></put-attribute>
+
+	</definition>
+
+
+</tiles-definitions>
